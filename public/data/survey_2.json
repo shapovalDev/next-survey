@@ -1,0 +1,25 @@
+{
+  "id": "survey_2",
+  "title": "User survey #2",
+  "screens": [
+    {
+      "id": "step_11",
+      "screenType": 1,
+      "title": "Select your gender:",
+      "options": [
+        { "id": "female", "label": "Female" },
+        { "id": "male", "label": "Male" }
+      ],
+      "next": "step_22"
+    },
+    {
+      "id": "step_22",
+      "screenType": 1,
+      "title": "So we can get to know you better, tell us about your relationship status.",
+      "options": [
+        { "id": "single", "label": "Single" },
+        { "id": "relationship", "label": "In a relationship" }
+      ]
+    }
+  ]
+}
