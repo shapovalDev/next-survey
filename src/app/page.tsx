@@ -11,7 +11,9 @@ const HomePage = () => {
   return (
     <DefaultLayout>
       <div className="w-full flex justify-center mb-4">
-        <span className="text-2xl font-bold">Choose the survey!</span>
+        <span className="text-xl font-bold text-center">
+          Choose the survey!
+        </span>
       </div>
       <SurveyList surveys={surveys as SurveyInterface[]} />
     </DefaultLayout>
