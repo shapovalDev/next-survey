@@ -23,7 +23,7 @@ npm install && npm run dev
 ### Survey data
 
 #### In the `/public/data` folder you will be able to see two .json files.
-* `survey_1.json` - file with the structure of the survey from [Figma](https://www.figma.com/file/pLPedeHKj4l1wxtfy8IWO4/OBRIO_Front_End_Test?type=design&node-id=0-1&mode=design&t=EinDdmTXbBMySsjO-0).
+* `survey_1.json` - file with the structure of the survey from Figma.
 * `survey_2.json` - file with the structure of the questionnaire, in which the user can provide custom data as an answer. Cases with a datepicker and a text input were implemented as an example.
 
 ---
