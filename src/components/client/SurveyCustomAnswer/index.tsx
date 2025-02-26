@@ -39,7 +39,7 @@ const SurveyCustomAnswer = ({
 
   const onSubmit = (formData: FormData) => {
     const { field } = formData || {};
-    let data = '';
+    let data = field;
 
     if (type === FieldType.Date) {
       data = dateToStandardFormat(field as Date);
