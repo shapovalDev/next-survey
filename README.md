@@ -1,5 +1,9 @@
 ## Survey Frontend App
 
+* A JSON structure was developed to describe the construction of a survey;
+* A UI was developed, which will form a survey based on the JSON structure;
+>_**It is assumed that the described JSON is the data that would was received from an imaginary backend, and the formation of this data is the task of an imaginary third-party application.**_
+
 ---
 
 #### Deployed version: https://next-survey-chi.vercel.app
@@ -18,8 +22,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Survey data
 
 #### In the `/public/data` folder you will be able to see two .json files.
-- `survey_1.json` - file with the structure of the survey from [Figma](https://www.figma.com/file/pLPedeHKj4l1wxtfy8IWO4/OBRIO_Front_End_Test?type=design&node-id=0-1&mode=design&t=EinDdmTXbBMySsjO-0).
-- `survey_2.json` - file with the structure of the questionnaire, in which the user can provide custom data as an answer. Cases with a datepicker and a text input were implemented as an example.
+* `survey_1.json` - file with the structure of the survey from [Figma](https://www.figma.com/file/pLPedeHKj4l1wxtfy8IWO4/OBRIO_Front_End_Test?type=design&node-id=0-1&mode=design&t=EinDdmTXbBMySsjO-0).
+* `survey_2.json` - file with the structure of the questionnaire, in which the user can provide custom data as an answer. Cases with a datepicker and a text input were implemented as an example.
 
 ---
 
