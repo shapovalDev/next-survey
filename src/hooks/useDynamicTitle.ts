@@ -7,7 +7,7 @@ export const useDynamicTitle = (
   title: string,
   dynamicFields: DynamicField[] = [],
 ) => {
-  const answers = useSelector((state: RootState) => state.answers.data);
+  const answers = useSelector((state: RootState) => state?.answers?.data);
   return useMemo(() => {
     if (!dynamicFields.length) {
       return title;

@@ -8,9 +8,12 @@ import { FieldType, Validation } from '@/types/surveyType';
 import Button from '@/ui/Button';
 import { dateToStandardFormat } from '@/helpers/dateFormat';
 
+interface FormData {
+  field?: any;
+}
+
 interface IProps {
   validation: Validation;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   submitAnswer: Function;
   type: HTMLInputTypeAttribute;
 }
@@ -20,7 +23,7 @@ const SurveyCustomAnswer = ({
   submitAnswer,
   type = FieldType.String,
 }: IProps) => {
-  const schema = yup.object({
+  const schema: yup.ObjectSchema<FormData> = yup.object({
     field: generateValidationSchema(validation),
   });
 
@@ -28,7 +31,7 @@ const SurveyCustomAnswer = ({
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'all',
     reValidateMode: 'onSubmit',
@@ -36,10 +39,10 @@ const SurveyCustomAnswer = ({
 
   const onSubmit = (formData: FormData) => {
     const { field } = formData || {};
-    let data = field;
+    let data = '';
 
     if (type === FieldType.Date) {
-      data = dateToStandardFormat(field);
+      data = dateToStandardFormat(field as Date);
     }
     submitAnswer(data);
   };
@@ -49,7 +52,7 @@ const SurveyCustomAnswer = ({
       <div className="mb-4">
         <Input
           type={type}
-          register={{ ...register('field') }}
+          register={{ ...register<'field'>('field') }}
           error={errors['field']}
           className="text-xl"
         />

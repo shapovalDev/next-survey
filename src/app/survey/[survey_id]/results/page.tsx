@@ -4,15 +4,15 @@ import React from 'react';
 import DefaultLayout from '@/hoc/server/DefaultLayout';
 import Table from '@/ui/Table';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/stateManagement/store';
+import { AppDispatch, RootState } from '@/stateManagement/store';
 import Button from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 import { resetStore } from '@/stateManagement/answers/actions';
 
 const Results = () => {
-  const answers = useSelector((state: RootState) => state.answers.data);
-  const surveyData = useSelector((state: RootState) => state.answers.survey);
-  const dispatch = useDispatch();
+  const answers = useSelector((state: RootState) => state?.answers?.data);
+  const surveyData = useSelector((state: RootState) => state?.answers?.survey);
+  const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
   const columns = [

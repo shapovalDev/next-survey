@@ -2,6 +2,7 @@ import {
   AddStepAnswerAction,
   AnswerReducerActionType,
   CurrentSurvey,
+  ResetStoreAction,
   SetCurrentSurveyAction,
   StepAnswer,
 } from '@/stateManagement/answers/types';
@@ -18,6 +19,6 @@ export const addAnswer = (data: StepAnswer): AddStepAnswerAction => ({
   payload: data,
 });
 
-export const resetStore = () => ({
+export const resetStore = (): ResetStoreAction => ({
   type: AnswerReducerActionType.ResetStore,
 });

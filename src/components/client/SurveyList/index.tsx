@@ -12,7 +12,7 @@ interface IProps {
 const SurveyList = ({ surveys }: IProps) => {
   const router = useRouter();
 
-  const chooseSurvey = (survey) => {
+  const chooseSurvey = (survey: SurveyInterface) => {
     router.push(`/survey/${survey.id}/step/${survey.screens[0].id}`);
   };
 

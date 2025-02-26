@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAnswer, setCurrentSurvey } from '@/stateManagement/answers/actions';
 import { useDynamicTitle } from '@/hooks/useDynamicTitle';
-import { RootState } from '@/stateManagement/store';
+import { AppDispatch, RootState } from '@/stateManagement/store';
 import { useNextStepPath } from '@/hooks/useNextStepPath';
 import SurveyCustomAnswer from '@/components/client/SurveyCustomAnswer';
+import { StepAnswer } from '@/stateManagement/answers/types';
 
 interface IProps {
   surveyId: string;
@@ -17,10 +18,14 @@ interface IProps {
 }
 
 const SurveyStep = ({ surveyId, surveyTitle, stepData }: IProps) => {
-  const answers = useSelector((state: RootState) => state.answers.data);
-  const nextStepPath = useNextStepPath(surveyId, stepData, answers);
+  const answers = useSelector((state: RootState) => state?.answers?.data);
+  const nextStepPath = useNextStepPath(
+    surveyId,
+    stepData,
+    answers as StepAnswer[],
+  );
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const {
     id,
     position,

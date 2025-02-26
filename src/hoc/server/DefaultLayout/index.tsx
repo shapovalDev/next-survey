@@ -17,7 +17,7 @@ interface IProps {
 const DefaultLayout = ({
   children,
   classes = '',
-  layoutType = 'primary',
+  layoutType = LayoutType.Primary,
   backButton = false,
 }: IProps) => {
   const styles = {

@@ -7,13 +7,13 @@ import {
   FieldError,
   FieldErrorsImpl,
   Merge,
-  RegisterOptions,
+  UseFormRegisterReturn,
 } from 'react-hook-form';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   className?: string;
-  register: RegisterOptions;
+  register: UseFormRegisterReturn;
 }
 
 const Input = ({ error, className = '', register, ...props }: IProps) => {
@@ -34,7 +34,7 @@ const Input = ({ error, className = '', register, ...props }: IProps) => {
       <div className="w-full text-left min-h-[20px]">
         {errorMessage && (
           <p className="text-sm text-red-500">
-            {capitalizeString(errorMessage)}
+            {capitalizeString(errorMessage as string)}
           </p>
         )}
       </div>

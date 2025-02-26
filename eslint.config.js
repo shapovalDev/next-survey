@@ -60,6 +60,8 @@ export default [
         },
       ],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
       'jsx-a11y/anchor-is-valid': 'warn',
       'import/no-anonymous-default-export': 'off',
       'no-console': 'warn',

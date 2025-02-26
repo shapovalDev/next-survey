@@ -1,21 +1,20 @@
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 import { getDataFromJSON } from '@/helpers/server/getDataFromJSON';
-import { ScreenType, SurveyInterface } from '@/types/surveyType';
+import { Screen, ScreenType, SurveyInterface } from '@/types/surveyType';
 import DefaultLayout, { LayoutType } from '@/hoc/server/DefaultLayout';
 import SurveyStep from '@/components/client/SurveyStep';
 import { getFilesFromDirectory } from '@/helpers/server/getFilesFromDirectory';
 
-interface StepParam {
-  survey_id: string;
-  step_id: string;
-}
+// interface StepParam {
+//   survey_id: string;
+//   step_id: string;
+// }
 
 interface IProps {
-  params: StepParam;
+  params: any;
 }
 
-const SurveyPage = async ({ params }: IProps) => {
+const SurveyPage = ({ params }: IProps) => {
   const survey: SurveyInterface = getDataFromJSON(
     `public/data/${params.survey_id}.json`,
   );
@@ -42,7 +41,7 @@ const SurveyPage = async ({ params }: IProps) => {
 
 export default SurveyPage;
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
   const surveyPaths = getFilesFromDirectory('public/data');
 
   let allSteps: { survey_id: string; step_id: string }[] = [];
@@ -61,17 +60,15 @@ export const generateStaticParams = async () => {
   return allSteps;
 };
 
-export async function generateMetadata({ params }: IProps): Promise<Metadata> {
+export const generateMetadata = ({ params }: IProps) => {
   const { screens }: SurveyInterface = getDataFromJSON(
     `public/data/${params.survey_id}.json`,
   );
 
-  const { title } = screens.find(
-    (screen: { id: string }) => screen.id === params.step_id,
-  );
+  const screen = screens.find((screen: Screen) => screen.id === params.step_id);
 
   return {
-    title: title,
-    description: `Answer the question: ${title}`,
+    title: screen?.title,
+    description: `Answer the question: ${screen?.title}`,
   };
-}
+};

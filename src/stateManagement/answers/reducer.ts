@@ -10,7 +10,10 @@ const initialState: AnswerState = {
   data: [],
 };
 
-const reducer = (state: AnswerState = initialState, action: AnswerAction) => {
+const answersReducer = (
+  state: AnswerState = initialState,
+  action: AnswerAction,
+) => {
   switch (action.type) {
     case AnswerReducerActionType.SetCurrentSurvey: {
       return state.survey ? state : { ...state, survey: action.payload };
@@ -44,4 +47,4 @@ const reducer = (state: AnswerState = initialState, action: AnswerAction) => {
   }
 };
 
-export default reducer;
+export default answersReducer;

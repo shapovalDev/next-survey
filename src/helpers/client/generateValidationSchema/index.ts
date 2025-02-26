@@ -1,18 +1,23 @@
 import * as yup from 'yup';
-import { Validation } from '@/types/surveyType';
+import { Rule, Validation } from '@/types/surveyType';
 import { validationRulesCollection } from '@/helpers/client/generateValidationSchema/handlers';
-import { Rule } from 'postcss';
+import { RuleCollection } from '@/helpers/client/generateValidationSchema/types';
 
-const getBaseSchema = (fieldType: string) => {
-  const handler = {
-    string: yup.string(),
-    date: yup.date(),
-  };
-
-  return handler[fieldType] ? handler[fieldType] : yup.string();
+const schemaTypes: Record<string, yup.AnySchema> = {
+  string: yup.string(),
+  date: yup.date(),
+  number: yup.number(),
+  boolean: yup.boolean(),
+  array: yup.array(),
 };
 
-export const generateValidationSchema = (validation?: Validation) => {
+const getBaseSchema = <T extends yup.AnySchema>(fieldType: string): T => {
+  return (schemaTypes[fieldType] || yup.string()) as T;
+};
+
+export const generateValidationSchema = (
+  validation?: Validation,
+): yup.AnySchema => {
   if (!validation || !validation.rules) {
     return yup.string();
   }
@@ -22,7 +27,8 @@ export const generateValidationSchema = (validation?: Validation) => {
   validation.rules.forEach(({ ruleName, value }: Rule) => {
     const ruleCollection = validationRulesCollection[validation.fieldType];
 
-    if (ruleCollection?.[ruleName]) {
+    if (ruleCollection?.[ruleName as RuleCollection]) {
+      // @ts-ignore
       fieldSchema = ruleCollection[ruleName](value, fieldSchema);
     }
   });

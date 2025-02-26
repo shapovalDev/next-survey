@@ -1,3 +1,5 @@
+import { RuleCollection } from '@/helpers/client/generateValidationSchema/types';
+
 interface Option {
   id: string;
   label: string;
@@ -32,8 +34,8 @@ export interface DynamicField {
   conditions: DynamicFieldCondition[];
 }
 
-interface Rule {
-  ruleName: string;
+export interface Rule {
+  ruleName: RuleCollection;
   value: string;
 }
 
@@ -69,7 +71,7 @@ interface ScreenWithoutOptions extends BaseScreen {
 
 interface ScreenWithValidation extends ScreenWithoutOptions {
   screenType: ScreenType.TextField | ScreenType.DateTime;
-  validation: Validation[];
+  validation: Validation;
 }
 
 interface ScreenWithoutValidation extends ScreenWithoutOptions {

@@ -9,8 +9,6 @@ export interface AnswerState {
   data: StepAnswer[] | [];
 }
 
-export type AnswerAction = AddStepAnswerAction | SetCurrentSurveyAction;
-
 export interface CurrentSurvey {
   id: string;
   title: string;
@@ -35,3 +33,12 @@ export interface AddStepAnswerAction {
   type: AnswerReducerActionType.AddStepAnswer;
   payload: StepAnswer;
 }
+
+export interface ResetStoreAction {
+  type: AnswerReducerActionType.ResetStore;
+}
+
+export type AnswerAction =
+  | AddStepAnswerAction
+  | SetCurrentSurveyAction
+  | ResetStoreAction;

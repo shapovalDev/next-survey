@@ -1,15 +1,18 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import reducer from '@/stateManagement/answers/reducer';
+import answersReducer from '@/stateManagement/answers/reducer';
 
 const rootReducer = combineReducers({
-  answers: reducer,
+  answers: answersReducer,
 });
 
 const enhancer =
-  process.env.NODE_ENV !== 'PROD'
+  process.env.NEXT_PUBLIC_NODE_ENV !== 'PROD'
     ? composeWithDevTools(applyMiddleware())
     : compose(applyMiddleware());
+
+// @ts-ignore
 export const store = createStore(rootReducer, enhancer);
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
