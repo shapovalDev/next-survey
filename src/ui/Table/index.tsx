@@ -5,15 +5,12 @@ interface Column {
   title: string;
 }
 
-interface IProps<T> {
+interface IProps {
   columns: Column[];
-  data: T[];
+  data: Record<string, string>[];
 }
 
-const Table = <T extends Record<string, string>>({
-  columns,
-  data,
-}: IProps<T>) => {
+const Table = ({ columns, data }: IProps) => {
   return (
     <div className="w-full h-full">
       <table className="w-full border border-secondaryGrey shadow-md">

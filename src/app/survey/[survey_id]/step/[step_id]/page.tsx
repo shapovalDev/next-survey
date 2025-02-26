@@ -5,13 +5,13 @@ import DefaultLayout, { LayoutType } from '@/hoc/server/DefaultLayout';
 import SurveyStep from '@/components/client/SurveyStep';
 import { getFilesFromDirectory } from '@/helpers/server/getFilesFromDirectory';
 
-// interface StepParam {
-//   survey_id: string;
-//   step_id: string;
-// }
+interface StepParam {
+  survey_id: string;
+  step_id: string;
+}
 
 interface IProps {
-  params: any;
+  params: StepParam | any;
 }
 
 const SurveyPage = ({ params }: IProps) => {

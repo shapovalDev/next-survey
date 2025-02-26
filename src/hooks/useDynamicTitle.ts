@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/stateManagement/store';
 import { DynamicField } from '@/types/surveyType';
 import { useMemo } from 'react';
+import { Answer } from '@/stateManagement/answers/types';
 
 export const useDynamicTitle = (
   title: string,
@@ -16,8 +17,9 @@ export const useDynamicTitle = (
     const replaceVariables = (title: string, dynamicFields: DynamicField[]) => {
       return dynamicFields.reduce((updatedTitle, field) => {
         const userAnswerId =
-          answers.find(({ stepId }) => field.stepReference === stepId)?.answer
-            ?.id ?? '';
+          (answers || []).find(
+            ({ stepId }: Answer) => field.stepReference === stepId,
+          )?.answer?.id ?? '';
 
         const replacement =
           field?.conditions.find(({ answerId }) => answerId === userAnswerId)

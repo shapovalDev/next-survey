@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from '@/stateManagement/store';
 import Button from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 import { resetStore } from '@/stateManagement/answers/actions';
+import { StepAnswer } from '@/stateManagement/answers/types';
 
 const Results = () => {
   const answers = useSelector((state: RootState) => state?.answers?.data);
@@ -21,11 +22,13 @@ const Results = () => {
     { key: 'answer', title: 'Answer' },
   ];
 
-  const data = answers?.map(({ stepId, title, answer: { value } }) => ({
-    id: stepId,
-    title,
-    answer: value,
-  }));
+  const data = answers!.map(
+    ({ stepId, title, answer: { value } }: StepAnswer) => ({
+      id: stepId,
+      title,
+      answer: value,
+    }),
+  );
 
   const backToSurveyList = () => {
     dispatch(resetStore());
