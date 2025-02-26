@@ -12,11 +12,12 @@
 
 #### Local launch:
 
+1. Create a .env file and add `NEXT_PUBLIC_NODE_ENV=DEV` there
+2. Run the command in your terminal:
 ```bash
 npm install && npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ---
 ### Survey data
