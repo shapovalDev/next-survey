@@ -4,6 +4,7 @@
   "screens": [
     {
       "id": "step_11",
+      "position": 0,
       "screenType": 1,
       "title": "Select your gender:",
       "options": [
@@ -14,12 +15,37 @@
     },
     {
       "id": "step_22",
-      "screenType": 1,
-      "title": "So we can get to know you better, tell us about your relationship status.",
-      "options": [
-        { "id": "single", "label": "Single" },
-        { "id": "relationship", "label": "In a relationship" }
-      ]
+      "screenType": 2,
+      "title": "Provide your full name",
+      "validation": {
+        "fieldType": "string",
+        "rules": [
+          {
+            "ruleName": "min",
+            "value": "3"
+          },
+          {
+            "ruleName": "max",
+            "value": "20"
+          }
+        ]
+      },
+      "next": "step_33"
+    },
+    {
+      "id": "step_33",
+      "screenType": 3,
+      "position": 1,
+      "title": "Provide your date of birth:",
+      "validation": {
+        "fieldType": "date",
+        "rules": [
+          {
+            "ruleName": "max",
+            "value": "today"
+          }
+        ]
+      }
     }
   ]
 }

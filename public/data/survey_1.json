@@ -4,11 +4,18 @@
   "screens": [
     {
       "id": "step_1",
+      "position": 0,
       "screenType": 1,
       "title": "Select your gender:",
       "options": [
-        { "id": "female", "label": "Female" },
-        { "id": "male", "label": "Male" }
+        {
+          "id": "female",
+          "label": "Female"
+        },
+        {
+          "id": "male",
+          "label": "Male"
+        }
       ],
       "next": "step_2"
     },
@@ -17,12 +24,26 @@
       "screenType": 1,
       "title": "So we can get to know you better, tell us about your relationship status.",
       "options": [
-        { "id": "single", "label": "Single" },
-        { "id": "relationship", "label": "In a relationship" }
+        {
+          "id": "single",
+          "label": "Single"
+        },
+        {
+          "id": "relationship",
+          "label": "In a relationship"
+        }
       ],
       "nextConditions": [
-        {"condition": "single", "next": "step_3"},
-        {"condition": "relationship", "next": "step_9"}
+        {
+          "stepReference": "step_2",
+          "condition": "single",
+          "next": "step_3"
+        },
+        {
+          "stepReference": "step_2",
+          "condition": "relationship",
+          "next": "step_9"
+        }
       ]
     },
     {
@@ -30,19 +51,64 @@
       "screenType": 1,
       "title": "Are you a single parent?",
       "options": [
-        { "id": "yes", "label": "Yes" },
-        { "id": "no", "label": "No" }
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "no",
+          "label": "No"
+        }
       ],
       "next": "step_4"
     },
     {
       "id": "step_4",
       "screenType": 1,
-      "title": "Single {gender} {who have children (if have children)} need a slightly different approach to improve their relationship. Which statement best describes you?",
+      "title": "Single {gender} {parentStatus} need a slightly different approach to improve their relationship. Which statement best describes you?",
+      "dynamicFields": [
+        {
+          "variable": "gender",
+          "stepReference": "step_1",
+          "conditions": [
+            {
+              "answerId": "male",
+              "value": "male"
+            },
+            {
+              "answerId": "female",
+              "value": "female"
+            }
+          ]
+        },
+        {
+          "variable": "parentStatus",
+          "stepReference": "step_3",
+          "conditions": [
+            {
+              "answerId": "yes",
+              "value": "who have children"
+            },
+            {
+              "answerId": "no",
+              "value": ""
+            }
+          ]
+        }
+      ],
       "options": [
-        { "id": "very_happy", "label": "I’m very unhappy with how things are going in my relationship" },
-        { "id": "unhappy", "label": "I’m unhappy with parts of my relationship, but some things are working well" },
-        { "id": "generally_happy", "label": "I’m generally happy in my relationship" }
+        {
+          "id": "very_happy",
+          "label": "I’m very unhappy with how things are going in my relationship"
+        },
+        {
+          "id": "unhappy",
+          "label": "I’m unhappy with parts of my relationship, but some things are working well"
+        },
+        {
+          "id": "generally_happy",
+          "label": "I’m generally happy in my relationship"
+        }
       ],
       "next": "step_5"
     },
@@ -51,27 +117,56 @@
       "screenType": 1,
       "title": "Do you tend to overthink?",
       "options": [
-        { "id": "yes", "label": "Yes" },
-        { "id": "no", "label": "No" }
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "no",
+          "label": "No"
+        }
       ],
       "next": "step_6"
     },
     {
       "id": "step_6",
       "screenType": 0,
-      "title": "Do you tend to overthink?",
+      "title": "So how does it work?",
       "subtitle": "We analyze hundreds of data points to create your unique astrological blueprint. This is combined with AI to tailor-make your astrological insights, based on your answers. We’re going to change your relationship with astrology.",
-      "next": "step_7"
+      "nextConditions": [
+        {
+          "stepReference": "step_5",
+          "condition": "yes",
+          "next": "step_7"
+        },
+        {
+          "stepReference": "step_5",
+          "condition": "no",
+          "next": "step_8"
+        }
+      ]
     },
     {
       "id": "step_7",
       "screenType": 1,
       "title": "What is most important to you?",
       "options": [
-        { "id": "success", "label": "Success" },
-        { "id": "romance", "label": "Romance" },
-        { "id": "stability", "label": "Stability" },
-        { "id": "freedom", "label": "Freedom" }
+        {
+          "id": "success",
+          "label": "Success"
+        },
+        {
+          "id": "romance",
+          "label": "Romance"
+        },
+        {
+          "id": "stability",
+          "label": "Stability"
+        },
+        {
+          "id": "freedom",
+          "label": "Freedom"
+        }
       ],
       "next": "step_15"
     },
@@ -80,10 +175,22 @@
       "screenType": 1,
       "title": "Is emotional control tricky for you?",
       "options": [
-        { "id": "yes", "label": "Yes" },
-        { "id": "sometimes", "label": "Sometimes" },
-        { "id": "rarely", "label": "Rarely" },
-        { "id": "not_at_all", "label": "Not at all" }
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "sometimes",
+          "label": "Sometimes"
+        },
+        {
+          "id": "rarely",
+          "label": "Rarely"
+        },
+        {
+          "id": "not_at_all",
+          "label": "Not at all"
+        }
       ],
       "next": "step_15"
     },
@@ -92,20 +199,68 @@
       "screenType": 1,
       "title": "Are you a parent?",
       "options": [
-        { "id": "yes", "label": "Yes" },
-        { "id": "no", "label": "No" }
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "no",
+          "label": "No"
+        }
       ],
       "next": "step_10"
     },
     {
       "id": "step_10",
       "screenType": 1,
-      "title": "{Gender} {who have children (if have children)} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?",
+      "title": "{gender} {parentStatus} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?",
+      "dynamicFields": [
+        {
+          "variable": "gender",
+          "stepReference": "step_1",
+          "conditions": [
+            {
+              "answerId": "male",
+              "value": "Male"
+            },
+            {
+              "answerId": "female",
+              "value": "Female"
+            }
+          ]
+        },
+        {
+          "variable": "parentStatus",
+          "stepReference": "step_9",
+          "conditions": [
+            {
+              "answerId": "yes",
+              "value": "who have children"
+            },
+            {
+              "answerId": "no",
+              "value": ""
+            }
+          ]
+        }
+      ],
       "options": [
-        { "id": "unhappy", "label": "I was unhappy with low things were going in my relationship" },
-        { "id": "unhappy_1", "label": "I was unhappy with parts of my relationship, but some thing were working" },
-        { "id": "generally", "label": "I was generally happy with my relationship" },
-        { "id": "never", "label": "I’ve never been in a relationship" }
+        {
+          "id": "unhappy",
+          "label": "I was unhappy with low things were going in my relationship"
+        },
+        {
+          "id": "unhappy_1",
+          "label": "I was unhappy with parts of my relationship, but some thing were working"
+        },
+        {
+          "id": "generally",
+          "label": "I was generally happy with my relationship"
+        },
+        {
+          "id": "never",
+          "label": "I’ve never been in a relationship"
+        }
       ],
       "next": "step_11"
     },
@@ -114,9 +269,18 @@
       "screenType": 1,
       "title": "Is your partner an introvert or extrovert?",
       "options": [
-        { "id": "introvert", "label": "Introvert" },
-        { "id": "extrovert", "label": "Extrovert" },
-        { "id": "a_bit_of_both", "label": "A bit of both" }
+        {
+          "id": "introvert",
+          "label": "Introvert"
+        },
+        {
+          "id": "extrovert",
+          "label": "Extrovert"
+        },
+        {
+          "id": "a_bit_of_both",
+          "label": "A bit of both"
+        }
       ],
       "next": "step_12"
     },
@@ -125,8 +289,14 @@
       "screenType": 1,
       "title": "What is your partner’s gender?",
       "options": [
-        { "id": "male", "label": "Male" },
-        { "id": "female", "label": "Female" }
+        {
+          "id": "male",
+          "label": "Male"
+        },
+        {
+          "id": "female",
+          "label": "Female"
+        }
       ],
       "next": "step_13"
     },
@@ -136,11 +306,26 @@
       "title": "Do you agree with the statement below?",
       "subtitle": "“My partner and I make sex a priority in our relationship”",
       "options": [
-        { "id": "strongly_agree", "label": "Strongly agree" },
-        { "id": "agree", "label": "Agree" },
-        { "id": "neutral", "label": "Neutral" },
-        { "id": "disagree", "label": "Disagree" },
-        { "id": "strongly_disagree", "label": "Strongly disagree" }
+        {
+          "id": "strongly_agree",
+          "label": "Strongly agree"
+        },
+        {
+          "id": "agree",
+          "label": "Agree"
+        },
+        {
+          "id": "neutral",
+          "label": "Neutral"
+        },
+        {
+          "id": "disagree",
+          "label": "Disagree"
+        },
+        {
+          "id": "strongly_disagree",
+          "label": "Strongly disagree"
+        }
       ],
       "next": "step_14"
     },
@@ -149,33 +334,91 @@
       "screenType": 1,
       "title": "When you think about your relationship goals, you feel...?",
       "options": [
-        { "id": "strongly_agree", "label": "Optimistic! They are totally doable, with some guidance." },
-        { "id": "agree", "label": "Cautious. I’ve struggled before, but I’m hopeful." },
-        { "id": "neutral", "label": "I’m feeling a little anxious, honestly." }
+        {
+          "id": "strongly_agree",
+          "label": "Optimistic! They are totally doable, with some guidance."
+        },
+        {
+          "id": "agree",
+          "label": "Cautious. I’ve struggled before, but I’m hopeful."
+        },
+        {
+          "id": "neutral",
+          "label": "I’m feeling a little anxious, honestly."
+        }
       ],
       "next": "step_15"
     },
     {
       "id": "step_15",
+      "position": 1,
       "screenType": 1,
       "title": "Where did you hear about us?",
       "options": [
-        { "id": "poster or_billboard", "label": "Poster or Billboard" },
-        { "id": "friend_family", "label": "Friend or Family" },
-        { "id": "instagram", "label": "Instagram" },
-        { "id": "mail_package", "label": "Direct Mail or Package Insert" },
-        { "id": "online_streaming", "label": "Online TV or Streaming TV" },
-        { "id": "tv", "label": "TV" },
-        { "id": "radio", "label": "Radio" },
-        { "id": "search_engine", "label": "Search Engine (Google, Bing, etc.)" },
-        { "id": "newspaper_magazine", "label": "Newspaper or Magazine" },
-        { "id": "facebook", "label": "Facebook" },
-        { "id": "blog_website", "label": "Blog Post or Website Review" },
-        { "id": "podcast", "label": "Podcast" },
-        { "id": "influencer", "label": "Influencer" },
-        { "id": "youtube", "label": "Youtube" },
-        { "id": "pinterest", "label": "Pinterest" },
-        { "id": "other", "label": "Other" }
+        {
+          "id": "poster or_billboard",
+          "label": "Poster or Billboard"
+        },
+        {
+          "id": "friend_family",
+          "label": "Friend or Family"
+        },
+        {
+          "id": "instagram",
+          "label": "Instagram"
+        },
+        {
+          "id": "mail_package",
+          "label": "Direct Mail or Package Insert"
+        },
+        {
+          "id": "online_streaming",
+          "label": "Online TV or Streaming TV"
+        },
+        {
+          "id": "tv",
+          "label": "TV"
+        },
+        {
+          "id": "radio",
+          "label": "Radio"
+        },
+        {
+          "id": "search_engine",
+          "label": "Search Engine (Google, Bing, etc.)"
+        },
+        {
+          "id": "newspaper_magazine",
+          "label": "Newspaper or Magazine"
+        },
+        {
+          "id": "facebook",
+          "label": "Facebook"
+        },
+        {
+          "id": "blog_website",
+          "label": "Blog Post or Website Review"
+        },
+        {
+          "id": "podcast",
+          "label": "Podcast"
+        },
+        {
+          "id": "influencer",
+          "label": "Influencer"
+        },
+        {
+          "id": "youtube",
+          "label": "Youtube"
+        },
+        {
+          "id": "pinterest",
+          "label": "Pinterest"
+        },
+        {
+          "id": "other",
+          "label": "Other"
+        }
       ]
     }
   ]

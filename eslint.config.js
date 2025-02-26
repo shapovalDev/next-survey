@@ -21,7 +21,6 @@ const compat = new FlatCompat({
 export default [
   ...fixupConfigRules(
     compat.extends(
-      // 'react/core-web-vitals',
       'eslint:recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:react/recommended',
@@ -52,15 +51,14 @@ export default [
       'react/jsx-uses-vars': 'error',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
+      'react/no-unescaped-entities': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
           argsIgnorePattern: '^_',
         },
       ],
-
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'jsx-a11y/anchor-is-valid': 'warn',
       'import/no-anonymous-default-export': 'off',

@@ -21,8 +21,8 @@ const Button = ({
         'w-full bg-primaryGrey border rounded-2xl border-secondaryGrey text-black shadow-md px-2 py-4',
         'active:text-white active:bg-gradient-to-b from-darkBlue via-darkPurple to-lightPurple',
         'flex items-center justify-center text-center break-words whitespace-normal',
-        { 'opacity-50 pointer-events-none': disabled },
-        className || '',
+        disabled ? 'opacity-50 pointer-events-none' : '',
+        className,
       )}
       {...restProps}
     >

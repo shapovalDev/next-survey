@@ -1,44 +1,77 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getDataFromJSON } from '@/helpers/getDataFromJSON';
-import { SurveyInterface } from '@/globalTypes';
-import DefaultLayout from '@/hoc/DefaultLayout';
-import SurveyStep from '@/components/SurveyStep';
+import { getDataFromJSON } from '@/helpers/server/getDataFromJSON';
+import { ScreenType, SurveyInterface } from '@/types/surveyType';
+import DefaultLayout, { LayoutType } from '@/hoc/server/DefaultLayout';
+import SurveyStep from '@/components/client/SurveyStep';
+import { getFilesFromDirectory } from '@/helpers/server/getFilesFromDirectory';
 
-interface PageProps {
-  params: { id: string };
+interface StepParam {
+  survey_id: string;
+  step_id: string;
 }
 
-const survey: SurveyInterface = getDataFromJSON('public/data/survey.json');
+interface IProps {
+  params: StepParam;
+}
 
-export const generateStaticParams = async () => {
-  return survey.screens.map((screen: { id }) => ({
-    id: screen.id,
-  }));
-};
+const SurveyPage = async ({ params }: IProps) => {
+  const survey: SurveyInterface = getDataFromJSON(
+    `public/data/${params.survey_id}.json`,
+  );
 
-const SurveyPage = ({ params }: PageProps) => {
-  const step = survey.screens.find((s: { id: string }) => s.id === params.id);
+  const step = survey.screens.find(({ id }) => id === params.step_id);
 
   if (!step) return notFound();
 
+  const layoutType =
+    step?.screenType === ScreenType.Info
+      ? LayoutType.Secondary
+      : LayoutType.Primary;
+
   return (
-    <DefaultLayout>
-      <SurveyStep stepData={step} />
+    <DefaultLayout backButton layoutType={layoutType}>
+      <SurveyStep
+        surveyId={survey.id}
+        surveyTitle={survey.title}
+        stepData={step}
+      />
     </DefaultLayout>
   );
 };
 
 export default SurveyPage;
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const screen = survey.screens.find((s: { id: string }) => s.id === params.id);
+export const generateStaticParams = async () => {
+  const surveyPaths = getFilesFromDirectory('public/data');
+
+  let allSteps: { survey_id: string; step_id: string }[] = [];
+
+  for (const path of surveyPaths) {
+    const { id: surveyId, screens }: SurveyInterface = getDataFromJSON(path);
+
+    const steps = screens.map(({ id }) => ({
+      survey_id: surveyId,
+      step_id: id,
+    }));
+
+    allSteps = [...allSteps, ...steps];
+  }
+
+  return allSteps;
+};
+
+export async function generateMetadata({ params }: IProps): Promise<Metadata> {
+  const { screens }: SurveyInterface = getDataFromJSON(
+    `public/data/${params.survey_id}.json`,
+  );
+
+  const { title } = screens.find(
+    (screen: { id: string }) => screen.id === params.step_id,
+  );
+
   return {
-    title: screen ? screen.title : 'Survey',
-    description: screen
-      ? `Answer the question: ${screen.title}`
-      : 'Survey Page',
+    title: title,
+    description: `Answer the question: ${title}`,
   };
 }

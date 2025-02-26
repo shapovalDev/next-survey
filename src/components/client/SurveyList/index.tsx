@@ -1,15 +1,15 @@
 'use client';
 
-import React, { FC } from 'react';
-import { SurveyInterface } from '@/globalTypes';
-import Button from '@/uiComponents/Button';
+import React from 'react';
+import { SurveyInterface } from '@/types/surveyType';
+import Button from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 
 interface IProps {
   surveys: SurveyInterface[] | [];
 }
 
-const SurveyList: FC<IProps> = ({ surveys }: IProps) => {
+const SurveyList = ({ surveys }: IProps) => {
   const router = useRouter();
 
   const chooseSurvey = (survey) => {

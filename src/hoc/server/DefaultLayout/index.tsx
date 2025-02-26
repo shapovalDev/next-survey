@@ -1,15 +1,20 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
-import BackButton from '@/uiComponents/BackButton';
+import BackButton from '@/ui/BackButton';
+
+export enum LayoutType {
+  Primary = 'primary',
+  Secondary = 'secondary',
+}
 
 interface IProps {
   children: ReactNode;
   classes?: string;
-  layoutType?: 'primary' | 'secondary';
+  layoutType?: LayoutType;
   backButton?: boolean;
 }
 
-const DefaultLayout: FC<IProps> = ({
+const DefaultLayout = ({
   children,
   classes = '',
   layoutType = 'primary',
@@ -17,7 +22,8 @@ const DefaultLayout: FC<IProps> = ({
 }: IProps) => {
   const styles = {
     primary: 'bg-lightPink text-black',
-    secondary: '',
+    secondary:
+      'bg-gradient-to-b from-darkBlue via-darkPurple to-lightPurple text-white',
   };
 
   return (

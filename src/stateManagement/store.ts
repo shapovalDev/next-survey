@@ -1,11 +1,15 @@
-import { combineReducers, createStore } from 'redux';
-import surveyReducer from '@/store/survey/reducers/surveyReducer';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducer from '@/stateManagement/answers/reducer';
 
 const rootReducer = combineReducers({
-  survey: surveyReducer,
+  answers: reducer,
 });
 
-export const store = createStore(rootReducer);
+const enhancer =
+  process.env.NODE_ENV !== 'PROD'
+    ? composeWithDevTools(applyMiddleware())
+    : compose(applyMiddleware());
+export const store = createStore(rootReducer, enhancer);
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
